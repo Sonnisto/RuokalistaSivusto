@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    background-color: rgb(239, 186, 207);
+    color: rgb(0, 0, 0);
+}
+
+.site-header {
+    background-color: bisque;
+    width: 100%;    /*  leveys  */
+    display: flex;   /*  tekee flex containerin, ja toimii flexbod modelin mukaan. Jotta align-items: center toimii, pitää olla */
+    height: 40px;
+    position: absolute;         /*  Missä sijaitsee ja miten (absolute, static, sticky, relative  */
+    align-items: center;        /*  keskittää itemit  */
+    top: 0;
+    left: 0;
+    border: 1px solid #000;
+
+    
+}
+
+.site-title {
+    font-family: monospace 'Courier New', Courier, monospace;
+    position: relative;
+    left: 3%;
+    
+}
+
+.restaurant-container {                     /*  Ravintolat omissa "containereissa" eli laatikoissa */
+    margin-top: 45px;                       /*  alkaa 40px sivun ylhäältä  */
+    display: flex;                          
+    flex-wrap: wrap;                        /*  Laittaa laatikot vierekkäin, ja kun tila loppuu niin alapuolelle  */
+    gap: 20px;                              /*  Laatikoiden välinen etäisyys  */
+    background-color: rgb(131, 158, 164);
+}
+
+.restaurant {                               /*  Jokainen ravintola laatikko erikseen  */
+    flex: 1 1 400px; /* Flex-grow, flex-shrink, and flex-basis. Adjust the width as needed */
+    box-sizing: border-box;
+    border: 0px solid #ddd; /* Optional, just for visual separation */
+    padding: 5px; /* Optional, adds padding inside each restaurant */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional, adds shadow for better visibility */
+    background-color: rgb(128, 158, 165);
+}
+
+.navigation {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(221, 146, 192);
+
+    
+}
+
+hr {
+    display: none;
+}
+
+.nav-button {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+}
+
+.nav-button.prev {
+    
+}
+
+.nav-button.next {
+    
+}
+
+.current_day {
+    flex-grow: 1;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 21px;
+    font-style: italic;
+    color: hwb(0 0% 100%);
+    margin: 0 20px;
+}
+
