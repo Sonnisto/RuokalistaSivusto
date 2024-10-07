@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, redirect
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 from dateutil import parser as date_parser
 
 app = Flask(__name__)
@@ -37,7 +37,7 @@ def get_menus_for_day(menu_data, date_today):
 def get_current_day_in_finnish():
     days_of_week = ['Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Sunnuntai']
     current_day_index = datetime.now().weekday()
-    return days_of_week[current_day_index]
+    return days_of_week[current_day_index] 
 
 # Home route: Redirects to the current day's menu
 @app.route('/')
@@ -45,36 +45,53 @@ def home():
     current_day_finnish = get_current_day_in_finnish()
     return redirect(url_for('show_day', day_name=current_day_finnish))
 
+
 # Route to show the menu for a specific day
 @app.route('/day/<day_name>')
 def show_day(day_name):
+    # Get today's date
+    today_date = datetime.now().date()
+
+    # Get the index of the day name (e.g., Maanantai = 0, Tiistai = 1, etc.)
+    days_of_week = ['Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Sunnuntai']
+    current_day_index = days_of_week.index(get_current_day_in_finnish())
+    requested_day_index = days_of_week.index(day_name)
+
+    # Calculate the date offset based on the requested day
+    date_offset = requested_day_index - current_day_index
+    requested_date = today_date + timedelta(days=date_offset)
+
+    # Get current date for display in the format DD.MM.YYYY
+    current_date = requested_date.strftime("%d.%m.%Y")
+
     all_restaurant_content = []
 
-    # Get today's date in ISO format (YYYY-MM-DD)
-    date_today = datetime.now().date()
-
-    current_date = datetime.now().strftime("%d.%m.%Y")
-
+    # Fetch menus for the requested date
     for json_url in JSON_URLS:
-        # Fetch JSON data for the restaurant
         restaurant_data = fetch_menu_data(json_url)
         restaurant_name = restaurant_data.get('RestaurantName', 'Unknown Restaurant')
-        
-        # Get the menu for today's date
-        day_menus = get_menus_for_day(restaurant_data, date_today)
-        
+        day_menus = get_menus_for_day(restaurant_data, requested_date)
+
         all_restaurant_content.append({
             'restaurant_name': restaurant_name,
             'day_menus': day_menus,
         })
 
-    # Navigation logic for previous/next day
-    days_of_week = ['Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Sunnuntai']
-    current_index = days_of_week.index(day_name)
-    prev_day = days_of_week[current_index - 1]
-    next_day = days_of_week[(current_index + 1) % len(days_of_week)]
+    # Set up navigation for previous and next day
+    prev_day_index = (requested_day_index - 1) % len(days_of_week)
+    next_day_index = (requested_day_index + 1) % len(days_of_week)
 
-    return render_template('day.html', all_restaurant_content=all_restaurant_content, current_date=current_date, day_name=day_name, prev_day=prev_day, next_day=next_day, datetime=str(datetime.now()))
+    prev_day = days_of_week[prev_day_index]
+    next_day = days_of_week[next_day_index]
+
+    return render_template('day.html', 
+                           all_restaurant_content=all_restaurant_content, 
+                           current_date=current_date, 
+                           day_name=day_name, 
+                           prev_day=prev_day, 
+                           next_day=next_day, 
+                           datetime=str(datetime.now()))
+
 
 # Starts the Flask application
 if __name__ == '__main__':

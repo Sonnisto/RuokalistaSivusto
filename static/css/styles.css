@@ -1,89 +1,105 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    background-color: rgb(239, 186, 207);
-    color: rgb(0, 0, 0);
+    font-size: 16px;
+    background-color: #f4f4f9;
+    color: #333;
 }
 
 .site-header {
-    background-color: bisque;
-    width: 100%;    /*  leveys  */
-    display: flex;   /*  tekee flex containerin, ja toimii flexbod modelin mukaan. Jotta align-items: center toimii, pitää olla */
-    height: 40px;
-    position: absolute;         /*  Missä sijaitsee ja miten (absolute, static, sticky, relative  */
-    align-items: center;        /*  keskittää itemit  */
+    background-color: #ffccb3;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    align-items: center;
+    position: static;
     top: 0;
     left: 0;
-    border: 1px solid #000;
-
-    
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding-left: 10px;
 }
 
 .site-title {
-    font-family: monospace 'Courier New', Courier, monospace;
-    position: relative;
-    left: 3%;
-    
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24px;
+    margin: 0;
+    padding-left: 20px;
+    color: #333
 }
 
-.restaurant-container {                     /*  Ravintolat omissa "containereissa" eli laatikoissa */
-    margin-top: 45px;                       /*  alkaa 40px sivun ylhäältä  */
-    display: flex;                          
-    flex-wrap: wrap;                        /*  Laittaa laatikot vierekkäin, ja kun tila loppuu niin alapuolelle  */
-    gap: 20px;                              /*  Laatikoiden välinen etäisyys  */
-    background-color: rgb(131, 158, 164);
+.restaurant-container {
+    margin-top: 50px;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    background-color: #e5eefc;
 }
 
-.restaurant {                               /*  Jokainen ravintola laatikko erikseen  */
-    flex: 1 1 400px; /* Flex-grow, flex-shrink, and flex-basis. Adjust the width as needed */
-    box-sizing: border-box;
-    border: 0px solid #ddd; /* Optional, just for visual separation */
-    padding: 5px; /* Optional, adds padding inside each restaurant */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional, adds shadow for better visibility */
-    background-color: rgb(128, 158, 165);
+.restaurant {
+    flex: 1 1 300px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.restaurant:hover {
+    transform: translateY(-5px);
+}
+
+.restaurant h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.restaurant ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.restaurant li {
+    margin-bottom: 5px;
 }
 
 .navigation {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 15px; /* Keep it at the top */
+    right: 0; /* Align to the right */
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Distribute buttons and text evenly */
     align-items: center;
-    background-color: rgb(221, 146, 192);
-
-    
-}
-
-hr {
-    display: none;
+    padding: 5px 10px; /* Add some padding for space around the elements */
+    background-color: #b48f9c; /* A bright, contrasting color */
+    height: 40px; /* Maintain the original height */
 }
 
 .nav-button {
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
-    font-size: 20px;
+    width: 40px; /* Original size */
+    height: 40px; /* Original size */
+    background-color: #ffffff; /* Keep the white background for contrast */
+    border: none; /* Remove any borders */
+    border-radius: 50%; /* Make the buttons circular */
+    font-size: 20px; /* Keep the font size as it was */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
 }
 
-.nav-button.prev {
-    
-}
-
-.nav-button.next {
-    
+.nav-button:hover {
+    background-color: #ffccb3; /* Lighter color when hovered */
 }
 
 .current_day {
-    flex-grow: 1;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 21px;
+    font-size: 18px; /* Adjusted for readability */
     font-style: italic;
-    color: hwb(0 0% 100%);
-    margin: 0 20px;
+    color: #ffffff; /* Keep the white text */
+    margin: 0 20px; /* Adds space between buttons and text */
 }
 
