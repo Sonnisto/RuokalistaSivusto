@@ -11,19 +11,20 @@
 <body>
 
     <header class="site-header">
-        <h2 class="site-title">Turun opiskelijoiden ruokalista</h2>
+        <h2 class="site-title">Turun opiskelaravintoloiden ruokalistat</h2>
     </header>
 
     <div class="restaurant-container">
         <!-- Loop through each restaurant's content -->
         {% for restaurant in all_restaurant_content %}
         <div class="restaurant">
-            <h2>{{ restaurant['restaurant_name'] }}</h2>
+            <h2>{{ restaurant['restaurant_name']  }} - <span class="opening-hours">{{ restaurant['Opening_hours'] }}</span></h2>
 
             <!-- Display the menus for the selected day -->
             {% if restaurant['day_menus'] %}
             <ul>
                 {% for menu in restaurant['day_menus'] %}
+                {% if menu["Components"] %}
                 <li>
                     <strong>{{ menu['Name'] }} - {{ menu['Price'] }}</strong>
                     <ul>
@@ -32,6 +33,7 @@
                         {% endfor %}
                     </ul>
                 </li>
+                {% endif %}
                 {% endfor %}
             </ul>
             {% else %}

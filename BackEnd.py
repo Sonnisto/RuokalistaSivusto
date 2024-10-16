@@ -2,30 +2,46 @@ from flask import Flask, render_template, url_for, redirect
 import requests
 from datetime import datetime, timedelta
 from dateutil import parser as date_parser
+from Lemminkaisenkatu import fetch_sodexo_data
 
 app = Flask(__name__)
 
 # JSON URLs for each restaurant
 JSON_URLS = [
-    "https://www.unica.fi/modules/json/json/Index?costNumber=1920&language=fi",
-    "https://www.unica.fi/modules/json/json/Index?costNumber=1970&language=fi",
-    "https://www.unica.fi/modules/json/json/Index?costNumber=1995&language=fi",
-    "https://www.unica.fi/modules/json/json/Index?costNumber=1980&language=fi",
-    "https://www.unica.fi/modules/json/json/Index?costNumber=1935&language=fi",
-    "https://www.unica.fi/modules/json/json/Index?costNumber=1985&language=fi",
-    "https://www.unica.fi/modules/json/json/Index?costNumber=2000&language=fi",
-    "https://www.unica.fi/modules/json/json/Index?costNumber=1900&language=fi"
+    "https://www.unica.fi/modules/json/json/Index?costNumber=1920&language=fi",    #Assarin-ullakko
+    "https://www.unica.fi/modules/json/json/Index?costNumber=1970&language=fi",    #Macciavelli
+    "https://www.unica.fi/modules/json/json/Index?costNumber=1995&language=fi",    #Galilei
+    "https://www.unica.fi/modules/json/json/Index?costNumber=1980&language=fi",    #Null
+    "https://www.unica.fi/modules/json/json/Index?costNumber=1985&language=fi",    #Delica
+    "https://www.unica.fi/modules/json/json/Index?costNumber=2000&language=fi",    #Null
+    "https://www.unica.fi/modules/json/json/Index?costNumber=1900&language=fi",    #Kisälli
     
 ]
 
 # Takes the JSON data and checks for errors.
 def fetch_menu_data(json_url):
-    response = requests.get(json_url)
-    response.raise_for_status()  # Will raise an HTTPError for bad responses
-    return response.json()
+    try:
+        response = requests.get(json_url)
+        response.raise_for_status()  # Raise an HTTPError for bad responses
+        data = response.json()
+
+
+        if data is None or not data["MenusForDays"]:
+            return None
+    
+        return data
+    except requests.RequestException as e:
+        print(f"Error {json_url}, cause {e}")
+        return None
+    except ValueError:
+        print(f"ValueError {json_url}")
+        return None
 
 # Function to extract menus for a specific day
 def get_menus_for_day(menu_data, date_today):
+    if menu_data is None:
+        return []
+    
     for day_menu in menu_data.get("MenusForDays", []):
         # Check if the current date matches the "Date" in the JSON data
         day_date = date_parser.parse(day_menu['Date']).date()
@@ -39,11 +55,15 @@ def get_current_day_in_finnish():
     current_day_index = datetime.now().weekday()
     return days_of_week[current_day_index] 
 
+
+
 # Home route: Redirects to the current day's menu
 @app.route('/')
 def home():
     current_day_finnish = get_current_day_in_finnish()
     return redirect(url_for('show_day', day_name=current_day_finnish))
+
+
 
 
 # Route to show the menu for a specific day
@@ -61,6 +81,7 @@ def show_day(day_name):
     date_offset = requested_day_index - current_day_index
     requested_date = today_date + timedelta(days=date_offset)
 
+
     # Get current date for display in the format DD.MM.YYYY
     current_date = requested_date.strftime("%d.%m.%Y")
 
@@ -69,13 +90,42 @@ def show_day(day_name):
     # Fetch menus for the requested date
     for json_url in JSON_URLS:
         restaurant_data = fetch_menu_data(json_url)
+
+        if restaurant_data is None:
+            print(f"No data returned for {json_url}, skipping")
+            continue
+
         restaurant_name = restaurant_data.get('RestaurantName', 'Unknown Restaurant')
         day_menus = get_menus_for_day(restaurant_data, requested_date)
+
+        #Gets the opening_hours and formats it {Opening_time}-{Closing_time}
+        lunch_time_raw = restaurant_data.get('MenusForDays')[0].get('LunchTime')
+        time_parts = lunch_time_raw.split('-')
+        start_time = time_parts[0].strip()
+        end_time = time_parts[1].split()[0].strip()
+        clean_lunch_time = f"{start_time}-{end_time}"
+
 
         all_restaurant_content.append({
             'restaurant_name': restaurant_name,
             'day_menus': day_menus,
+            'Opening_hours': clean_lunch_time,
         })
+
+
+
+
+    sodexo_data = fetch_sodexo_data()  # Call the function to fetch Sodexo data
+    if sodexo_data:
+        sodexo_menus = get_menus_for_day(sodexo_data, requested_date)  # Extract the menus for the requested date
+        all_restaurant_content.append({
+            'restaurant_name': sodexo_data.get('RestaurantName'),
+            'day_menus': sodexo_menus,
+            'Opening_hours': "10:30-13:00"   #HARD-CODED Opening-hours, because json-format doesnt include it
+        })
+
+
+
 
     # Set up navigation for previous and next day
     prev_day_index = (requested_day_index - 1) % len(days_of_week)

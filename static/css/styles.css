@@ -39,7 +39,7 @@ body {
 .restaurant {
     flex: 1 1 300px;
     border: 1px solid #ddd;
-    padding: 15px;
+    padding: 20px;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -51,7 +51,7 @@ body {
 }
 
 .restaurant h2 {
-    font-size: 20px;
+    font-size: 21px;
     margin-bottom: 10px;
     color: #333;
 }
@@ -63,26 +63,35 @@ body {
 
 .restaurant li {
     margin-bottom: 5px;
+    
 }
+
+.opening-hours {
+    font-size: 20px; 
+    font-weight: bold; 
+    color: #007BFF; 
+}
+
+
 
 .navigation {
     position: absolute;
-    top: 15px; /* Keep it at the top */
-    right: 0; /* Align to the right */
+    top: 15px; 
+    right: 0; 
     display: flex;
-    justify-content: space-between; /* Distribute buttons and text evenly */
+    justify-content: space-between;
     align-items: center;
-    padding: 5px 10px; /* Add some padding for space around the elements */
-    background-color: #b48f9c; /* A bright, contrasting color */
-    height: 40px; /* Maintain the original height */
+    padding: 5px 10px; 
+    background-color: #b48f9c; 
+    height: 40px; 
 }
 
 .nav-button {
-    width: 40px; /* Original size */
-    height: 40px; /* Original size */
-    background-color: #ffffff; /* Keep the white background for contrast */
-    border: none; /* Remove any borders */
-    border-radius: 50%; /* Make the buttons circular */
+    width: 40px; 
+    height: 40px; 
+    background-color: #ffffff;
+    border: none; 
+    border-radius: 50%; /* Makes the buttons circular */
     font-size: 20px; /* Keep the font size as it was */
     display: flex;
     justify-content: center;
@@ -97,9 +106,9 @@ body {
 }
 
 .current_day {
-    font-size: 18px; /* Adjusted for readability */
-    font-style: italic;
-    color: #ffffff; /* Keep the white text */
-    margin: 0 20px; /* Adds space between buttons and text */
+    font-size: 18px; 
+    font-style: italic; 
+    color: #ffffff; 
+    margin: 0 20px;
 }
 
