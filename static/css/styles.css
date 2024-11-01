@@ -1,114 +1,171 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    background-color: #f4f4f9;
-    color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  background-color: #f4f4f9;
+  color: #333;
 }
 
 .site-header {
-    background-color: #ffccb3;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    height: 70px;
-    align-items: center;
-    position: static;
-    top: 0;
-    left: 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding-left: 10px;
+  background-color: #ffccb3;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  align-items: center;
+  position: static;
+  top: 0;
+  left: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding-left: 10px;
 }
 
 .site-title {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 24px;
-    margin: 0;
-    padding-left: 20px;
-    color: #333
+  font-family: "Courier New", Courier, monospace;
+  font-size: 24px;
+  margin: 0;
+  padding-left: 20px;
+  color: #333;
 }
 
 .restaurant-container {
-    margin-top: 50px;
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    background-color: #e5eefc;
+  margin-top: 50px;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background-color: #e5eefc;
 }
 
 .restaurant {
-    flex: 1 1 300px;
-    border: 1px solid #ddd;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+  flex: 1 1 300px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
 .restaurant:hover {
-    transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 .restaurant h2 {
-    font-size: 21px;
-    margin-bottom: 10px;
-    color: #333;
+  font-size: 21px;
+  margin-bottom: 10px;
+  color: #333;
 }
 
 .restaurant ul {
-    padding-left: 20px;
-    list-style-type: disc;
+  padding-left: 20px;
+  list-style-type: disc;
 }
 
 .restaurant li {
-    margin-bottom: 5px;
-    
+  margin-bottom: 5px;
 }
 
 .opening-hours {
-    font-size: 20px; 
-    font-weight: bold; 
-    color: #007BFF; 
+  font-size: 20px;
+  font-weight: bold;
+  color: #007bff;
 }
 
-
-
 .navigation {
-    position: absolute;
-    top: 15px; 
-    right: 0; 
+  position: absolute;
+  top: 15px;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: #b48f9c;
+  height: 40px;
+}
+
+.nav-button {
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 50%; /* Makes the buttons circular */
+  font-size: 20px; /* Keep the font size as it was */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.nav-button:hover {
+  background-color: #ffccb3; /* Lighter color when hovered */
+}
+
+.current_day {
+  font-size: 18px;
+  font-style: italic;
+  color: #ffffff;
+  margin: 0 20px;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px; /* Reduce base font size for mobile */
+  }
+
+  .site-header {
+    height: auto; /* Allow height to adjust */
+    padding: 10px; /* Add padding for better spacing */
+  }
+
+  .site-title {
+    font-size: 20px; /* Smaller title size on mobile */
+    padding-left: 0; /* Remove left padding */
+    text-align: center; /* Center the title */
+  }
+
+  .restaurant-container {
+    margin-top: 30px; /* Adjust margin for mobile */
+    padding: 10px; /* Less padding for mobile */
+    flex-direction: column; /* Stack restaurant cards vertically */
+    align-items: center; /* Center restaurant cards */
+  }
+
+  .restaurant {
+    flex: 1 1 100%; /* Make restaurant cards full width */
+    margin-bottom: 20px; /* Space between restaurant cards */
+  }
+
+  .restaurant h2 {
+    font-size: 18px; /* Smaller restaurant title */
+  }
+
+  .opening-hours {
+    font-size: 16px; /* Smaller opening hours */
+  }
+
+  .navigation {
+    position: relative; /* Change to relative positioning */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5px 10px; 
     background-color: #b48f9c; 
     height: 40px; 
-}
+    margin-top: 10px; /* Add top margin to create space below the header */
+    z-index: 10; /* Ensure it appears above other elements */
+  }
 
-.nav-button {
-    width: 40px; 
-    height: 40px; 
-    background-color: #ffffff;
-    border: none; 
-    border-radius: 50%; /* Makes the buttons circular */
-    font-size: 20px; /* Keep the font size as it was */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth hover effect */
-}
+  .nav-button {
+    width: 35px; /* Smaller button size */
+    height: 35px; /* Smaller button size */
+    font-size: 18px; /* Smaller font size */
+    margin-bottom: 5px; /* Space between buttons */
+  }
 
-.nav-button:hover {
-    background-color: #ffccb3; /* Lighter color when hovered */
+  .current_day {
+    font-size: 16px; /* Smaller current day font size */
+    margin: 10px 0; /* Add margin for spacing */
+  }
 }
-
-.current_day {
-    font-size: 18px; 
-    font-style: italic; 
-    color: #ffffff; 
-    margin: 0 20px;
-}
-

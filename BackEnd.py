@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, redirect
-import requests
+import requests #pip install requests
 from datetime import datetime, timedelta
 from dateutil import parser as date_parser
 from Lemminkaisenkatu import fetch_sodexo_data
