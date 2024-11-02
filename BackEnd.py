@@ -98,8 +98,15 @@ def show_day(day_name):
         restaurant_name = restaurant_data.get('RestaurantName', 'Unknown Restaurant')
         day_menus = get_menus_for_day(restaurant_data, requested_date)
 
+
         #Gets the opening_hours and formats it {Opening_time}-{Closing_time}
-        lunch_time_raw = restaurant_data.get('MenusForDays')[0].get('LunchTime')
+        lunch_time_raw = restaurant_data.get('MenusForDays')[0].get('LunchTime', None)
+
+        if lunch_time_raw is None:
+            continue
+        
+
+
         time_parts = lunch_time_raw.split('-')
         start_time = time_parts[0].strip()
         end_time = time_parts[1].split()[0].strip()
