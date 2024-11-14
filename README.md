@@ -26,6 +26,3 @@ Sovellus käyttää julkisia JSON-rajapintoja eri opiskelijaravintoloilta. Tieto
 1. **Päivän ruokalista**: Sovellus avautuu nykyisen päivän ruokalistaan, ja käyttäjä voi nähdä päivän tarjonnan kaikista ravintoloista.
 2. **Navigointi eri päivien välillä**: Navigointipainikkeilla voi selata eteen- ja taaksepäin eri päivien ruokalistoja.
 
----
-
-Tämä README antaa perustiedot sovelluksen käytöstä, teknologioista ja asennuksesta.
