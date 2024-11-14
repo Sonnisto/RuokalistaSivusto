@@ -19,6 +19,3 @@ Tämä projekti on web-sovellus, joka hakee ja näyttää Turun opiskelijaravint
 - **`templates/day.html`**: HTML-pohja päivittäiselle ruokalistalle.
 - **`static/css/styles.css`**: CSS-tiedosto, joka määrittelee sovelluksen tyylin.
 
-## Rajapinnat
-Sovellus käyttää julkisia JSON-rajapintoja eri opiskelijaravintoloilta. Tietoa haetaan ja käsitellään Pythonin `requests`-kirjastolla, ja käsitellyt ruokalistat näytetään sovelluksessa.
-
