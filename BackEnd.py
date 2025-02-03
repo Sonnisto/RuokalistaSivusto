@@ -14,7 +14,7 @@ JSON_URLS = [
     "https://www.unica.fi/menuapi/feed/json?costNumber=1970&language=fi",          #Macciavelli
     "https://www.unica.fi/menuapi/feed/json?costNumber=1995&language=fi",          #Galilei
     "https://www.unica.fi/menuapi/feed/json?costNumber=1980&language=fi",          #Dental
-    "https://www.unica.fi/menuapi/feed/json?costNumber=1985&language=fi",         #Delica
+    "https://www.unica.fi/menuapi/feed/json?costNumber=1985&language=fi",          #Delica
     "https://www.unica.fi/menuapi/feed/json?costNumber=2000&language=fi",          #Linus
     "https://www.unica.fi/menuapi/feed/json?costNumber=1900&language=fi",          #Kisälli
     
@@ -99,20 +99,14 @@ def show_day(day_name):
         #Gets the opening_hours and formats it {Opening_time}-{Closing_time}
         lunch_time_raw = restaurant_data.get('MenusForDays')[0].get('LunchTime', None)
 
-        if lunch_time_raw is None:
-            continue
-
-        lunch_time_hyphen_normalized = lunch_time_raw.replace("–", "-")
-
-        if lunch_time_hyphen_normalized is None:
-            continue
-    
-        time_parts = lunch_time_hyphen_normalized.strip().split('-')
-    
-        start_time = time_parts[0].strip()
-        end_time = time_parts[1]
-        clean_lunch_time = f"{start_time}-{end_time}"
-
+        if lunch_time_raw:
+            lunch_time_hyphen_normalized = lunch_time_raw.replace("–", "-")
+            time_parts = lunch_time_hyphen_normalized.strip().split('-')
+            start_time = time_parts[0].strip()
+            end_time = time_parts[1]
+            clean_lunch_time = f"{start_time}-{end_time}"
+        else:
+            clean_lunch_time = "Tarkista aukioloaika"
 
         #Append the restaurant to the list if there is a menu. Otherwise don't show it on the HTML
         if day_menus: 
