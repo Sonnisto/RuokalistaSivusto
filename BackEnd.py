@@ -14,7 +14,7 @@ JSON_URLS = [
     "https://www.unica.fi/menuapi/feed/json?costNumber=1970&language=fi",          #Macciavelli
     "https://www.unica.fi/menuapi/feed/json?costNumber=1995&language=fi",          #Galilei
     "https://www.unica.fi/menuapi/feed/json?costNumber=1980&language=fi",          #Dental
-    "https://www.unica.fi/menuapi/feed/json?costNumber=1985&language=fii",         #Delica
+    "https://www.unica.fi/menuapi/feed/json?costNumber=1985&language=fi",         #Delica
     "https://www.unica.fi/menuapi/feed/json?costNumber=2000&language=fi",          #Linus
     "https://www.unica.fi/menuapi/feed/json?costNumber=1900&language=fi",          #Kisälli
     
