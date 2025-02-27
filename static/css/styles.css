@@ -1,6 +1,16 @@
-html, body {
+html {
   overflow-x: hidden;
+  margin: 0;
   width: 100%;
+}
+
+hr {
+  display: none;
+}
+
+* {
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 body {
@@ -8,6 +18,7 @@ body {
   font-size: 16px;
   background-color: #f4f4f9;
   color: #333;
+  margin: 0;
 }
 
 .site-header {
@@ -17,11 +28,7 @@ body {
   justify-content: space-between;
   height: 70px;
   align-items: center;
-  position: static;
-  top: 0;
-  left: 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding-left: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
 }
 
 .site-title {
@@ -39,6 +46,7 @@ body {
   flex-wrap: wrap;
   gap: 20px;
   background-color: #e5eefc;
+  
 }
 
 .restaurant {
@@ -77,15 +85,17 @@ body {
 }
 
 .navigation {
-  position: absolute;
-  top: 15px;
-  right: 0;
+  position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 5px 10px;
-  background-color: #b48f9c;
-  height: 40px;
+  justify-content: space-between;
+  padding-right: 15px;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .nav-button {
@@ -93,84 +103,98 @@ body {
   height: 40px;
   background-color: #ffffff;
   border: none;
-  border-radius: 50%; /* Makes the buttons circular */
-  font-size: 20px; /* Keep the font size as it was */
+  border-radius: 50%; 
+  font-size: 20px; 
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth hover effect */
+  transition: background-color 0.3s ease; 
+  padding: 0;
+  margin: 0;
 }
 
 .nav-button:hover {
-  background-color: #ffccb3; /* Lighter color when hovered */
+  background-color: #ffccb3;
 }
 
 .current_day {
   font-size: 18px;
   font-style: italic;
-  color: #ffffff;
+  font-weight: bold;
+  color: #141313;
   margin: 0 20px;
 }
 
 @media (max-width: 768px) {
   body {
-    font-size: 14px; /* Reduce base font size for mobile */
+    font-size: 14px;
+    margin: 0;
   }
 
   .site-header {
-    height: auto; /* Allow height to adjust */
-    padding: 10px; /* Add padding for better spacing */
+    height: auto; 
+    padding: 10px 10px 10px 0; 
   }
 
   .site-title {
-    font-size: 20px; /* Smaller title size on mobile */
-    padding-left: 0; /* Remove left padding */
-    text-align: center; /* Center the title */
+    font-size: 19px; 
+    padding-left: 0; 
+    text-align: center; 
   }
 
   .restaurant-container {
-    margin-top: 30px; /* Adjust margin for mobile */
-    padding: 10px; /* Less padding for mobile */
-    flex-direction: column; /* Stack restaurant cards vertically */
-    align-items: center; /* Center restaurant cards */
+    margin-top: 30px; 
+    padding: 10px; 
+    flex-direction: column; 
+    align-items: center;
   }
 
   .restaurant {
-    flex: 1 1 100%; /* Make restaurant cards full width */
-    margin-bottom: 20px; /* Space between restaurant cards */
+    flex: 1 1 100%; 
+    margin-bottom: 20px; 
   }
 
   .restaurant h2 {
-    font-size: 18px; /* Smaller restaurant title */
+    font-size: 18px; 
   }
 
   .opening-hours {
-    font-size: 16px; /* Smaller opening hours */
+    font-size: 16px; 
+  }
+
+  .nav-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   .navigation {
-    position: relative; /* Change to relative positioning */
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    margin: 0;
+    padding: 7px 5px;
+    background-color: #b48f9c;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    padding: 5px 10px; 
-    background-color: #b48f9c; 
-    height: 40px; 
-    margin-top: 10px; /* Add top margin to create space below the header */
-    z-index: 10; /* Ensure it appears above other elements */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 100;
   }
 
   .nav-button {
-    width: 35px; /* Smaller button size */
-    height: 35px; /* Smaller button size */
-    font-size: 18px; /* Smaller font size */
-    margin-bottom: 5px; /* Space between buttons */
+    width: 40px; 
+    height: 40px; 
+    font-size: 18px; 
+    margin-bottom: 0px;
+    border-radius: 50%;
   }
 
   .current_day {
-    font-size: 16px; /* Smaller current day font size */
-    margin: 10px 0; /* Add margin for spacing */
+    font-size: 16px; 
+    margin: 0;
   }
 }

@@ -6,12 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ day_name }} Menu</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/themes.css') }}">
 </head>
 
 <body>
 
     <header class="site-header">
         <h2 class="site-title">Turun opiskelijaravintoloiden ruokalistat</h2>
+
+        <div class="nav-container">
+
+            <select id="themeSelector">
+                <option value="default">Default</option>
+                <option value="dark-mode">dark-mode</option>
+                <option value="violet-crush">violet-crush</option>
+            </select>
+
+            <div class="navigation">
+                <a href="{{ url_for('show_day', day_name=prev_day) }}" class="nav-button prev"><</a>
+                <span class="current_day"> {{ day_name }} {{ current_date }} </span>
+                <a href="{{ url_for('show_day', day_name=next_day) }}" class="nav-button right">></a>
+            </div>
+        </div>
     </header>
 
     <div class="restaurant-container">
@@ -43,12 +60,9 @@
         <hr>
         {% endfor %}
     </div>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
-    <div class="navigation">
-        <a href="{{ url_for('show_day', day_name=prev_day) }}" class="nav-button prev"><</a>
-        <span class="current_day"> {{ day_name }} {{ current_date }} </span>
-        <a href="{{ url_for('show_day', day_name=next_day) }}" class="nav-button right">></a>
-    </div>
 </body>
 
 </html>

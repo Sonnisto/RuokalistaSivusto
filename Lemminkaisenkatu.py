@@ -46,6 +46,7 @@ def transform_sodexo_json(sodexo_data):
 
     # Process each meal date
     for meal_date in sodexo_data['mealdates']:
+
         day_name = meal_date['date']  # Assuming this is the day name like "Maanantai"
         iso_date = convert_day_to_iso8601(day_name)  # Convert the day name directly
 
@@ -53,9 +54,7 @@ def transform_sodexo_json(sodexo_data):
             "Date": iso_date,  
             "SetMenus": []
         }
-
         
-
         # Process each course
         for course in meal_date['courses'].values():
 
